@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Jiya 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
+  color:white;
+}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-110vh);}
+}
+
+/* card */
+.card{
+  width:95%;
+  max-width:520px;
+  padding:30px;
+  border-radius:25px;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.15);
+  text-align:center;
+  box-shadow:0 0 40px rgba(255,0,100,0.3);
+  z-index:2;
+}
+
+/* pages */
+.page{display:none;}
+.active{display:block;animation:fade 0.5s;}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}}
+
+/* text */
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+/* buttons */
+button{
+  padding:12px 20px;
+  margin:10px;
+  border:none;
+  border-radius:25px;
+  background:white;
+  color:#ff4d6d;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{transform:scale(1.1);}
+
+/* movie cards */
+.movie{
+  margin:10px;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.25);
+  cursor:pointer;
+  transition:0.3s;
+}
+.movie:hover{
+  transform:scale(1.05);
+  background:rgba(255,255,255,0.4);
+}
+
+/* PETALS */
+.petal{
+  position:absolute;
+  font-size:18px;
+  pointer-events:none;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0);}
+  100%{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* coin */
+.coin{
+  font-size:70px;
+  display:none;
+}
+.spin{
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{
+  from{transform:rotateY(0)}
+  to{transform:rotateY(360deg)}
+}
+
+/* confetti */
+.confetti{
+  position:absolute;
+  width:8px;height:8px;
+  top:-10px;
+  animation:fall 2s linear;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* hearts */
+for(let i=0;i<20;i++){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"%";
+ h.style.animationDuration=(4+Math.random()*3)+"s";
+ document.body.appendChild(h);
+}
+</script>
+
+<div class="card">
+
+<div class="page active" id="p1">
+<h1>Hey Cupcake 🧁</h1>
+<p>Anvit has a special request 💌</p>
+<button onclick="next(2)">Let's Start ✨</button>
+</div>
+
+<div class="page" id="p2">
+<h1>Hey Jiyaaa 🥺</h1>
+<p>Will you be my girlfriend again? 💖</p>
+<button onclick="yesClick()">YES 💘</button>
+<button id="noBtn">NO 😤</button>
+</div>
+
+<div class="page" id="p3">
+<h1>Really?!! 😭❤️</h1>
+<p>I can't believe this is happening 🫶</p>
+<button onclick="next(4)">Next</button>
+</div>
+
+<div class="page" id="p4">
+<h1>This feels unreal 💫</h1>
+<p>You just made my world 🥺❤️</p>
+<button onclick="next(5)">Next</button>
+</div>
+
+<div class="page" id="p5">
+<h1>Online Date Night 💕</h1>
+<button onclick="next(6)">28th March</button>
+<button onclick="next(6)">29th March</button>
+<p>Time: 8:30 PM ⏰</p>
+</div>
+
+<div class="page" id="p6">
+<h1>For You 🌹</h1>
+<button onclick="petalExplosion()">Open Your Bouquet 💐</button>
+</div>
+
+<div class="page" id="p7">
+<h1>Movie for the Date 🎬</h1>
+<div class="movie" onclick="next(8)">Rom-Com 💕</div>
+<div class="movie" onclick="next(8)">Marvel 🦸</div>
+</div>
+
+<div class="page" id="p8">
+<h1>Hugs 🤗 or Kisses 😘?</h1>
+<button onclick="spinCoin()">Spin the Coin 🪙</button>
+<div class="coin" id="coin">🪙</div>
+<p id="result"></p>
+</div>
+
+</div>
+
+<script>
+function next(n){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('p'+n).classList.add('active');
+}
+
+/* YES */
+function yesClick(){
+ next(3);
+ confetti();
+}
+
+/* NO runs */
+let no=document.getElementById("noBtn");
+no.addEventListener("mouseover",()=>{
+ no.style.position="absolute";
+ no.style.left=Math.random()*80+"%";
+ no.style.top=Math.random()*80+"%";
+});
+
+/* confetti */
+function confetti(){
+ for(let i=0;i<80;i++){
+  let c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"%";
+  c.style.background=hsl(${Math.random()*360},100%,50%);
+  document.body.appendChild(c);
+ }
+}
+
+/* 🌸 PETAL EXPLOSION (FINAL FIX) */
+function petalExplosion(){
+ for(let i=0;i<40;i++){
+  let p=document.createElement("div");
+  p.className="petal";
+  p.innerHTML="🌸";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=(2+Math.random()*3)+"s";
+  p.style.fontSize=(14+Math.random()*10)+"px";
+  document.body.appendChild(p);
+ }
+ setTimeout(()=>{ next(7); },1500);
+}
+
+/* coin */
+function spinCoin(){
+ let coin=document.getElementById("coin");
+ coin.style.display="block";
+ coin.classList.add("spin");
+
+ setTimeout(()=>{
+  coin.classList.remove("spin");
+  document.getElementById("result").innerHTML="You get BOTH 😘❤️";
+ },2000);
+}
+</script>
+
+</body>
+</html>
